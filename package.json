@@ -1,0 +1,30 @@
+{
+  "name": "rotaract-sies-backend",
+  "version": "1.0.0",
+  "description": "Robust Node.js and Express backend server for Rotaract Club of SIES Sion East",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "watch": "node --watch server.js",
+    "nodemon": "npx nodemon server.js",
+    "supervise": "npx pm2 start server.js --name rotaract-backend --watch"
+  },
+  "keywords": [
+    "express",
+    "rotaract",
+    "nodejs",
+    "resilient",
+    "backend"
+  ],
+  "author": "Rotaract Club of SIES Sion East",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

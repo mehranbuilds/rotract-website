@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0A0A0B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Rotaract Club of SIES Sion East | द्रोणाचार्य</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Rozha One & Mukta (Devanagari), Outfit, Plus Jakarta Sans with display=swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;700;800&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'xs': '420px'
+          },
+          colors: {
+            brand: {
+              yellow: '#FACC15',
+              'yellow-hover': '#EAB308',
+              'yellow-light': '#FEF08A',
+              black: '#0A0A0B',
+              charcoal: '#121215',
+              muted: '#18181B',
+              border: '#27272A'
+            }
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            devanagari: ['"Rozha One"', 'Mukta', 'serif'],
+            devSans: ['Mukta', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Mobile-first usability & performance enhancements */
+    html {
+      -webkit-tap-highlight-color: transparent;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      scroll-padding-top: 80px;
+      overflow-x: hidden;
+    }
+    
+    body {
+      overflow-x: hidden;
+      touch-action: manipulation;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    /* Safe Area Insets for modern devices with notches / Dynamic Island */
+    @supports (padding: env(safe-area-inset-bottom)) {
+      footer {
+        padding-bottom: calc(2.5rem + env(safe-area-inset-bottom)) !important;
+      }
+      #actionToast {
+        bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+      }
+      #mobileQuickBar {
+        bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+      }
+    }
+
+    /* Prevent iOS Safari auto-zoom on form inputs by ensuring 16px font on small screens */
+    @media (max-width: 640px) {
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+    }
+
+    /* Subtle active click compression effect for touch screens */
+    button:active, a:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
+    }
+
+    /* Performance optimization: lazy layout & paint for below-the-fold sections */
+    .optimize-render {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 650px;
+    }
+
+    /* Smooth hardware acceleration for drawer & floating notifications */
+    #mobileMenu, #actionToast, #mobileQuickBar {
+      will-change: transform, opacity;
+    }
+
+    .glow-yellow {
+      box-shadow: 0 0 45px -10px rgba(250, 204, 21, 0.35);
+    }
+    .text-glow-yellow {
+      text-shadow: 0 0 35px rgba(250, 204, 21, 0.5);
+    }
+    .grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(250, 204, 21, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(250, 204, 21, 0.04) 1px, transparent 1px);
+    }
+    @keyframes pulse-gold {
+      0%, 100% { border-color: rgba(250, 204, 21, 0.3); }
+      50% { border-color: rgba(250, 204, 21, 0.9); box-shadow: 0 0 25px rgba(250, 204, 21, 0.4); }
+    }
+    .highlight-form {
+      animation: pulse-gold 1.5s ease-in-out 2;
+    }
+  </style>
+</head>
+<body class="bg-brand-black text-gray-200 font-sans selection:bg-brand-yellow selection:text-brand-black overflow-x-hidden antialiased">
+
+  <!-- Mobile-Responsive Toast Notification -->
+  <div 
+    id="actionToast" 
+    class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-brand-charcoal/95 backdrop-blur-md border border-brand-yellow/60 text-white px-4 sm:px-5 py-3.5 rounded-2xl shadow-2xl"
+    role="status" 
+    aria-live="polite"
+  >
+    <i data-lucide="check-circle" id="toastIcon" class="w-5 h-5 text-brand-yellow flex-shrink-0"></i>
+    <p id="toastMessage" class="text-xs sm:text-sm font-medium text-gray-200">Action successful!</p>
+  </div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-brand-black/95 backdrop-blur-md border-b border-brand-border transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        
+        <!-- Brand identity -->
+        <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-brand-yellow to-yellow-600 flex items-center justify-center text-brand-black font-black font-heading text-base sm:text-xl shadow-lg shadow-brand-yellow/20 group-hover:scale-105 transition-transform duration-200 flex-shrink-0">
+            RC
+          </div>
+          <div class="flex flex-col">
+            <span class="font-heading font-black text-base sm:text-xl tracking-tight text-white group-hover:text-brand-yellow transition-colors leading-tight">
+              SIES Sion East
+            </span>
+            <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-brand-yellow uppercase -mt-0.5 sm:-mt-1">
+              Rotaract Club | District 3141
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-6 lg:gap-7 font-medium text-sm">
+          <a href="#theme" class="text-gray-300 hover:text-brand-yellow transition-colors font-devSans">थीम: द्रोणाचार्य</a>
+          <a href="#upcoming-events" class="text-gray-300 hover:text-brand-yellow transition-colors flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
+            Upcoming Events
+          </a>
+          <a href="#projects" class="text-gray-300 hover:text-brand-yellow transition-colors">Past Projects</a>
+          <a href="#leadership" class="text-gray-300 hover:text-brand-yellow transition-colors">Our Team</a>
+          <a href="#contact" class="text-gray-300 hover:text-brand-yellow transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Side: Status Badge, Instagram & CTA Connect -->
+        <div class="hidden sm:flex items-center gap-3">
+          <!-- Official Instagram Link -->
+          <a 
+            href="https://www.instagram.com/rcsiesse?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-brand-charcoal border border-brand-border hover:border-brand-yellow text-gray-300 hover:text-brand-yellow transition-all"
+            title="Follow us on Instagram (@rcsiesse)"
+          >
+            <i data-lucide="instagram" class="w-3.5 h-3.5 text-brand-yellow"></i>
+            <span>@rcsiesse</span>
+          </a>
+
+          <!-- Backend Live Status Badge -->
+          <div id="serverStatusBadge" class="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-brand-charcoal border border-brand-border text-gray-400" title="Backend Server Status">
+            <span id="serverStatusDot" class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span id="serverStatusText">Checking Server...</span>
+          </div>
+
+          <!-- Connect Button -->
+          <button id="navConnectBtn" class="px-5 py-2.5 rounded-full bg-brand-yellow text-brand-black font-bold text-sm transition-all duration-300 hover:bg-brand-yellow-hover hover:shadow-lg hover:shadow-brand-yellow/25 flex items-center gap-2 cursor-pointer">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span>Connect</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button (Touch Friendly 44x44px minimum) -->
+        <button 
+          id="mobileMenuBtn" 
+          type="button" 
+          aria-label="Toggle Navigation Menu" 
+          aria-expanded="false" 
+          aria-controls="mobileMenu"
+          class="md:hidden p-2.5 min-w-[44px] min-h-[44px] rounded-xl bg-brand-charcoal text-brand-yellow border border-brand-border active:scale-95 transition-all flex items-center justify-center cursor-pointer"
+        >
+          <i data-lucide="menu" id="menuIcon" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-brand-black/98 backdrop-blur-xl border-b border-brand-border px-5 py-5 transition-all duration-300 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex flex-col gap-2.5 font-semibold text-sm">
+        <a href="#theme" class="mobile-nav-link text-gray-200 hover:text-brand-yellow active:bg-brand-charcoal transition-colors py-3 px-3.5 rounded-xl hover:bg-brand-charcoal font-devSans flex items-center justify-between min-h-[44px]">
+          <span>थीम: द्रोणाचार्य</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-500"></i>
+        </a>
+        <a href="#upcoming-events" class="mobile-nav-link text-gray-200 hover:text-brand-yellow active:bg-brand-charcoal transition-colors py-3 px-3.5 rounded-xl hover:bg-brand-charcoal flex items-center justify-between min-h-[44px]">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-yellow"></span>
+            Upcoming Events
+          </span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-500"></i>
+        </a>
+        <a href="#projects" class="mobile-nav-link text-gray-200 hover:text-brand-yellow active:bg-brand-charcoal transition-colors py-3 px-3.5 rounded-xl hover:bg-brand-charcoal flex items-center justify-between min-h-[44px]">
+          <span>Past Projects</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-500"></i>
+        </a>
+        <a href="#leadership" class="mobile-nav-link text-gray-200 hover:text-brand-yellow active:bg-brand-charcoal transition-colors py-3 px-3.5 rounded-xl hover:bg-brand-charcoal flex items-center justify-between min-h-[44px]">
+          <span>Our Team</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-500"></i>
+        </a>
+        <a href="#contact" class="mobile-nav-link text-gray-200 hover:text-brand-yellow active:bg-brand-charcoal transition-colors py-3 px-3.5 rounded-xl hover:bg-brand-charcoal flex items-center justify-between min-h-[44px]">
+          <span>Contact Us</span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-500"></i>
+        </a>
+        
+        <div class="pt-3 border-t border-brand-border/60 flex flex-col gap-2.5">
+          <!-- Quick Email in Mobile Menu -->
+          <a 
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Message%20from%20Mobile%20Visitor" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="mobile-nav-link text-xs text-gray-200 hover:text-brand-yellow py-3 px-3.5 rounded-xl bg-brand-charcoal border border-brand-border flex items-center justify-between min-h-[44px]"
+          >
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-brand-yellow"></i>
+              <span>Email Our Secretary (Gmail)</span>
+            </div>
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i>
+          </a>
+
+          <!-- Official Instagram Link in Mobile Menu -->
+          <a 
+            href="https://www.instagram.com/rcsiesse?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="mobile-nav-link text-xs text-gray-200 hover:text-brand-yellow py-3 px-3.5 rounded-xl bg-brand-charcoal border border-brand-border flex items-center justify-between min-h-[44px]"
+          >
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="instagram" class="w-4 h-4 text-brand-yellow"></i>
+              <span>Follow @rcsiesse on Instagram</span>
+            </div>
+            <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400"></i>
+          </a>
+
+          <button id="mobileConnectBtn" class="mobile-nav-link w-full text-center py-3.5 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-yellow/20 active:scale-95 transition-all min-h-[48px] cursor-pointer">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>Connect With Us</span>
+          </button>
+
+          <div class="pt-1 text-center">
+            <a href="/admin" class="inline-flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-brand-yellow transition-colors py-1.5 px-3" title="Club Admin Portal (Requires Passcode)">
+              <i data-lucide="lock" class="w-3 h-3 text-brand-yellow/60"></i>
+              <span>Admin Portal Access</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Backdrop Overlay for Drawer -->
+  <div id="mobileMenuBackdrop" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-30 hidden md:hidden transition-opacity duration-300" aria-hidden="true"></div>
+
+  <main>
+    <!-- Hero / Theme Section -->
+    <section id="theme" class="relative min-h-[75vh] sm:min-h-[85vh] flex items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-16 overflow-hidden grid-pattern">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-brand-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        
+        <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full border border-brand-yellow/40 bg-brand-charcoal/80 text-brand-yellow text-xs sm:text-sm font-semibold mb-6 sm:mb-8 shadow-sm max-w-[92vw] overflow-hidden">
+          <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping flex-shrink-0"></span>
+          <span class="truncate">Rotaract Club of SIES Sion East | District 3141</span>
+        </div>
+
+        <div class="space-y-2 sm:space-y-4">
+          <span class="text-[11px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em] text-gray-400 font-semibold block">Official Club Theme</span>
+          <h1 class="font-devanagari text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[9.5rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-brand-yellow via-yellow-400 to-amber-600 text-glow-yellow leading-tight py-2 sm:py-3 break-words hyphens-none select-none">
+            द्रोणाचार्य
+          </h1>
+        </div>
+
+        <p class="mt-6 sm:mt-8 text-gray-300 text-sm sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed px-2">
+          Welcome to the Rotaract Club of SIES Sion East. Guided by our theme <strong class="text-brand-yellow font-devanagari">द्रोणाचार्य</strong>, we bring college students together to learn useful skills, help our local community, and make lasting friendships.
+        </p>
+
+        <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
+          <a href="#upcoming-events" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-brand-yellow text-brand-black font-extrabold text-sm hover:bg-yellow-400 transition-all duration-200 glow-yellow shadow-lg flex items-center justify-center gap-2">
+            <span>Explore Upcoming Events</span>
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+          </a>
+          <a href="#leadership" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-brand-charcoal border border-brand-border text-white font-bold text-sm hover:border-brand-yellow transition-all duration-200 flex items-center justify-center gap-2">
+            <span>Meet Our Team</span>
+            <i data-lucide="users" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-10 sm:py-12 bg-brand-charcoal border-y border-brand-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center">
+          
+          <div class="p-4 sm:p-6 rounded-2xl bg-brand-black/70 border border-brand-border hover:border-brand-yellow/50 transition-all">
+            <div class="text-3xl sm:text-5xl font-heading font-black text-brand-yellow">35</div>
+            <p class="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mt-1.5 sm:mt-2">Active Members</p>
+          </div>
+
+          <div class="p-4 sm:p-6 rounded-2xl bg-brand-black/70 border border-brand-border hover:border-brand-yellow/50 transition-all">
+            <div class="text-3xl sm:text-5xl font-heading font-black text-brand-yellow">5+</div>
+            <p class="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mt-1.5 sm:mt-2">Flagship Projects</p>
+          </div>
+
+          <div class="p-4 sm:p-6 rounded-2xl bg-brand-black/70 border border-brand-border hover:border-brand-yellow/50 transition-all">
+            <div class="text-3xl sm:text-5xl font-heading font-black text-white">3141</div>
+            <p class="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mt-1.5 sm:mt-2">Rotaract District</p>
+          </div>
+
+          <div class="p-4 sm:p-6 rounded-2xl bg-brand-black/70 border border-brand-border hover:border-brand-yellow/50 transition-all">
+            <div class="text-2xl sm:text-4xl font-heading font-black text-white">SIES</div>
+            <p class="text-[11px] sm:text-xs font-semibold text-gray-300 uppercase tracking-wider mt-1.5 sm:mt-2">Sion East Campus</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW SECTION: Upcoming Events -->
+    <section id="upcoming-events" class="optimize-render py-16 sm:py-24 bg-brand-black border-b border-brand-border relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow font-bold text-xs uppercase tracking-wider mb-3">
+            <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
+            What's Happening Next
+          </div>
+          <h2 class="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-white">Upcoming Events</h2>
+          <p class="text-gray-400 text-xs sm:text-base mt-2 sm:mt-3 px-2">
+            Join us for our upcoming workshops, community drives, and campus activities. All students and guests are welcome!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+
+          <!-- Upcoming Event 1 -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-yellow/40 hover:border-brand-yellow transition-all duration-300 flex flex-col justify-between group shadow-lg shadow-brand-yellow/5">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-yellow text-brand-black">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                  Next Up
+                </span>
+                <span class="text-xs font-semibold text-brand-yellow border border-brand-yellow/30 bg-brand-yellow/10 px-2 py-0.5 rounded">
+                  Registrations Open
+                </span>
+              </div>
+
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white group-hover:text-brand-yellow transition-colors mb-2">
+                Youth Leadership Conclave 2026
+              </h3>
+
+              <div class="space-y-1.5 my-3 text-xs text-gray-300">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-4 h-4 text-brand-yellow flex-shrink-0"></i>
+                  <span>Saturday, 24th October 2026 • 10:00 AM</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow flex-shrink-0"></i>
+                  <span>SIES Campus Auditorium, Sion East</span>
+                </div>
+              </div>
+
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mt-2">
+                An interactive one-day conference connecting college students with experienced professionals, youth leaders, and changemakers across Mumbai.
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-brand-border/60">
+              <button 
+                type="button" 
+                class="upcoming-event-btn w-full py-3 px-4 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[44px]"
+                data-event="Youth Leadership Conclave 2026"
+              >
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Join Event</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Upcoming Event 2 -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-yellow/40 hover:border-brand-yellow transition-all duration-300 flex flex-col justify-between group shadow-lg shadow-brand-yellow/5">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-yellow text-brand-black">
+                  <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+                  Community Drive
+                </span>
+                <span class="text-xs font-semibold text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 rounded">
+                  Volunteers Welcome
+                </span>
+              </div>
+
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white group-hover:text-brand-yellow transition-colors mb-2">
+                Community Blood Donation & Health Camp
+              </h3>
+
+              <div class="space-y-1.5 my-3 text-xs text-gray-300">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-4 h-4 text-brand-yellow flex-shrink-0"></i>
+                  <span>Sunday, 8th November 2026 • 9:00 AM</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow flex-shrink-0"></i>
+                  <span>Sion East Community Hall, Mumbai</span>
+                </div>
+              </div>
+
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mt-2">
+                A life-saving blood donation and basic health check camp organized in partnership with local doctors and hospitals to support families in need.
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-brand-border/60">
+              <button 
+                type="button" 
+                class="upcoming-event-btn w-full py-3 px-4 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[44px]"
+                data-event="Community Blood Donation & Health Camp"
+              >
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Join Event</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Upcoming Event 3 -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-yellow/40 hover:border-brand-yellow transition-all duration-300 flex flex-col justify-between group shadow-lg shadow-brand-yellow/5">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-yellow text-brand-black">
+                  <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
+                  Sports
+                </span>
+                <span class="text-xs font-semibold text-brand-yellow border border-brand-yellow/30 bg-brand-yellow/10 px-2 py-0.5 rounded">
+                  Team Entries Open
+                </span>
+              </div>
+
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white group-hover:text-brand-yellow transition-colors mb-2">
+                Dronacharya Box Cricket & Sports Meet
+              </h3>
+
+              <div class="space-y-1.5 my-3 text-xs text-gray-300">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-4 h-4 text-brand-yellow flex-shrink-0"></i>
+                  <span>Saturday, 21st November 2026 • 8:00 AM</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow flex-shrink-0"></i>
+                  <span>SIES Sports Turf & Grounds</span>
+                </div>
+              </div>
+
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mt-2">
+                A weekend sports day bringing college students together for fast-paced box cricket matches, fun athletic games, and team spirit.
+              </p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-brand-border/60">
+              <button 
+                type="button" 
+                class="upcoming-event-btn w-full py-3 px-4 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[44px]"
+                data-event="Dronacharya Box Cricket & Sports Meet"
+              >
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Join Event</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Past Flagship Projects Section (Past Events - NO JOIN BUTTONS) -->
+    <section id="projects" class="optimize-render py-16 sm:py-24 bg-brand-charcoal/30 border-b border-brand-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+          <div class="inline-block px-3 py-1 rounded-md bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow font-bold text-xs uppercase tracking-wider mb-2">
+            Completed Initiatives
+          </div>
+          <h2 class="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-white">Our Past Flagship Projects</h2>
+          <p class="text-gray-400 text-xs sm:text-base mt-2 sm:mt-3 px-2">
+            Here is a look at the major projects our club organized recently across career training, legal awareness, fellowship, and sports.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+
+          <!-- Event 1: LinkedIn & CV Session (PAST - NO JOIN BUTTON) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border hover:border-brand-border/80 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-charcoal text-gray-300 border border-brand-border">Past Project 1</span>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                  <i data-lucide="check" class="w-3 h-3"></i> Completed
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white mb-2">LinkedIn & CV Workshop</h3>
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                A practical workshop where college students learned how to write clean resumes, build their LinkedIn profile, and prepare for job interviews.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border/60 flex items-center justify-between text-xs text-gray-400">
+              <span class="flex items-center gap-1.5"><i data-lucide="award" class="w-3.5 h-3.5 text-brand-yellow"></i> Career Skills</span>
+              <span class="text-gray-500 font-medium">Session Completed</span>
+            </div>
+          </div>
+
+          <!-- Event 2: IPR Law Event (PAST - NO JOIN BUTTON) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border hover:border-brand-border/80 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-charcoal text-gray-300 border border-brand-border">Past Project 2</span>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                  <i data-lucide="check" class="w-3 h-3"></i> Completed
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white mb-2">IPR Law Seminar</h3>
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                A beginner-friendly session on patents, trademarks, and copyright laws to help students protect their original ideas and projects.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border/60 flex items-center justify-between text-xs text-gray-400">
+              <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-brand-yellow"></i> Legal Awareness</span>
+              <span class="text-gray-500 font-medium">Session Completed</span>
+            </div>
+          </div>
+
+          <!-- Event 3: Whisper and Lies (PAST - NO JOIN BUTTON) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border hover:border-brand-border/80 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-charcoal text-gray-300 border border-brand-border">Past Project 3</span>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                  <i data-lucide="check" class="w-3 h-3"></i> Completed
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white mb-2">Whisper & Lies Game Night</h3>
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                A fun mystery game evening where members solved clues, tested their deduction skills, and made new friends in a friendly competition.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border/60 flex items-center justify-between text-xs text-gray-400">
+              <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-3.5 h-3.5 text-brand-yellow"></i> Fellowship</span>
+              <span class="text-gray-500 font-medium">Session Completed</span>
+            </div>
+          </div>
+
+          <!-- Event 4: Beach Volleyball (PAST - NO JOIN BUTTON) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border hover:border-brand-border/80 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-charcoal text-gray-300 border border-brand-border">Past Project 4</span>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                  <i data-lucide="check" class="w-3 h-3"></i> Completed
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white mb-2">Beach Volleyball Tournament</h3>
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                An energetic outdoor sports day on the sand where club members and friends teamed up for friendly, spirited volleyball matches.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border/60 flex items-center justify-between text-xs text-gray-400">
+              <span class="flex items-center gap-1.5"><i data-lucide="activity" class="w-3.5 h-3.5 text-brand-yellow"></i> Sports & Fitness</span>
+              <span class="text-gray-500 font-medium">Tournament Completed</span>
+            </div>
+          </div>
+
+          <!-- Event 5: One Prompt Many Stories (PAST - NO JOIN BUTTON) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border hover:border-brand-border/80 transition-all duration-300 flex flex-col justify-between group md:col-span-2 lg:col-span-1">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-brand-charcoal text-gray-300 border border-brand-border">Past Project 5</span>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                  <i data-lucide="check" class="w-3 h-3"></i> Completed
+                </span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-heading font-bold text-white mb-2">One Prompt Many Stories</h3>
+              <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                A creative writing contest where participants received one exciting prompt to write short stories, poetry, and reflections.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-brand-border/60 flex items-center justify-between text-xs text-gray-400">
+              <span class="flex items-center gap-1.5"><i data-lucide="book-open" class="w-3.5 h-3.5 text-brand-yellow"></i> Creative Arts</span>
+              <span class="text-gray-500 font-medium">Contest Completed</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="optimize-render py-16 sm:py-24 border-b border-brand-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+          <div class="inline-block px-3 py-1 rounded-md bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow font-bold text-xs uppercase tracking-wider mb-2">
+            Club Leadership
+          </div>
+          <h2 class="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-white">Our Team</h2>
+          <p class="text-gray-400 text-xs sm:text-base mt-2 px-2">Meet the student team leading our club activities and community projects this year.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+
+          <!-- Rtr. Aditya Upadhyay (Club President) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-yellow/70 text-center hover:border-brand-yellow shadow-lg shadow-brand-yellow/10 transition-all group flex flex-col justify-between">
+            <div>
+              <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-5 rounded-full p-1 flex items-center justify-center border-2 border-brand-yellow overflow-hidden bg-brand-black">
+                <img 
+                  src="image.png" 
+                  alt="Aditya Upadhyay" 
+                  loading="lazy"
+                  decoding="async"
+                  width="112"
+                  height="112"
+                  class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300"
+                  onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-brand-black rounded-full flex items-center justify-center text-brand-yellow font-heading font-bold text-2xl\'>AU</div>';"
+                >
+              </div>
+              <h3 class="font-heading font-bold text-lg sm:text-xl text-white">Rtr. Aditya Upadhyay</h3>
+              <p class="inline-block px-3 py-1 mt-2 rounded bg-brand-yellow text-brand-black text-[11px] sm:text-xs font-black tracking-wide uppercase">Club President</p>
+              <p class="text-xs text-gray-400 mt-2.5 sm:mt-3 leading-relaxed">Guiding club projects, mentoring members, and helping everyone contribute their best.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-brand-border/60">
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Message%20for%20President%20Aditya%20Upadhyay" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 text-xs text-brand-yellow hover:text-white font-semibold transition-colors py-1"
+                title="Opens an email tab in Gmail"
+              >
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                <span>Email President</span>
+                <i data-lucide="external-link" class="w-3 h-3 text-brand-yellow/70"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Rtr. Aalap Soneta (Vice President) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border text-center hover:border-brand-yellow/60 transition-all group flex flex-col justify-between">
+            <div>
+              <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-5 rounded-full bg-gradient-to-tr from-brand-yellow to-yellow-600 p-1 flex items-center justify-center">
+                <div class="w-full h-full bg-brand-black rounded-full flex items-center justify-center text-brand-yellow font-heading font-bold text-xl sm:text-2xl group-hover:bg-brand-charcoal transition-colors">
+                  AS
+                </div>
+              </div>
+              <h3 class="font-heading font-bold text-lg sm:text-xl text-white">Rtr. Aalap Soneta</h3>
+              <p class="inline-block px-3 py-1 mt-2 rounded bg-brand-yellow/10 text-brand-yellow text-[11px] sm:text-xs font-bold tracking-wide uppercase border border-brand-yellow/20">Vice President</p>
+              <p class="text-xs text-gray-400 mt-2.5 sm:mt-3 leading-relaxed">Supporting event teams, coordinating club planning, and helping with execution.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-brand-border/60">
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Message%20for%20Vice%20President%20Aalap%20Soneta" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 text-xs text-gray-300 hover:text-brand-yellow font-semibold transition-colors py-1"
+                title="Opens an email tab in Gmail"
+              >
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                <span>Message Vice President</span>
+                <i data-lucide="external-link" class="w-3 h-3 text-gray-400"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Rtr. Tanshuka Mandhare (Club Secretary) - With Direct Email Trigger -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-yellow/70 text-center hover:border-brand-yellow shadow-lg shadow-brand-yellow/10 transition-all group flex flex-col justify-between">
+            <div>
+              <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-5 rounded-full p-1 flex items-center justify-center border-2 border-brand-yellow overflow-hidden bg-brand-black">
+                <img 
+                  src="image_2.png" 
+                  alt="Tanshuka Mandhare" 
+                  loading="lazy"
+                  decoding="async"
+                  width="112"
+                  height="112"
+                  class="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-300"
+                  onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-brand-black rounded-full flex items-center justify-center text-brand-yellow font-heading font-bold text-2xl\'>TM</div>';"
+                >
+              </div>
+              <h3 class="font-heading font-bold text-lg sm:text-xl text-white">Rtr. Tanshuka Mandhare</h3>
+              <p class="inline-block px-3 py-1 mt-2 rounded bg-brand-yellow text-brand-black text-[11px] sm:text-xs font-black tracking-wide uppercase">Club Secretary</p>
+              <p class="text-xs text-gray-400 mt-2.5 sm:mt-3 leading-relaxed">Managing club announcements, meeting notes, inquiries, and member updates.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-brand-border/60">
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Message%20for%20Club%20Secretary%20Tanshuka%20Mandhare" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-brand-yellow/10 border border-brand-yellow/40 hover:bg-brand-yellow hover:text-brand-black text-brand-yellow text-xs font-bold transition-all w-full min-h-[40px]"
+                title="Opens an email tab in Gmail addressed to our Secretary"
+              >
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                <span>Email Our Secretary</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Rtr. Anuj Singh (Sergeant-At-Arms) -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-brand-charcoal border border-brand-border text-center hover:border-brand-yellow/60 transition-all group flex flex-col justify-between">
+            <div>
+              <div class="w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-5 rounded-full bg-gradient-to-tr from-brand-yellow to-yellow-600 p-1 flex items-center justify-center">
+                <div class="w-full h-full bg-brand-black rounded-full flex items-center justify-center text-brand-yellow font-heading font-bold text-xl sm:text-2xl group-hover:bg-brand-charcoal transition-colors">
+                  AS
+                </div>
+              </div>
+              <h3 class="font-heading font-bold text-lg sm:text-xl text-white">Rtr. Anuj Singh</h3>
+              <p class="inline-block px-3 py-1 mt-2 rounded bg-brand-yellow/10 text-brand-yellow text-[11px] sm:text-xs font-bold tracking-wide uppercase border border-brand-yellow/20">Sergeant-At-Arms (SAA)</p>
+              <p class="text-xs text-gray-400 mt-2.5 sm:mt-3 leading-relaxed">Ensuring meetings start on time, keeping sessions orderly, and welcoming guests.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-brand-border/60">
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Message%20for%20SAA%20Anuj%20Singh" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 text-xs text-gray-300 hover:text-brand-yellow font-semibold transition-colors py-1"
+                title="Opens an email tab in Gmail"
+              >
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                <span>Contact SAA</span>
+                <i data-lucide="external-link" class="w-3 h-3 text-gray-400"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect & Contact Section -->
+    <section id="contact" class="optimize-render py-16 sm:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="contactContainer" class="rounded-3xl bg-brand-charcoal border border-brand-border p-5 sm:p-10 lg:p-12 relative overflow-hidden glow-yellow transition-all duration-300">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+            
+            <!-- Left Column: Simple Contact Info & Direct Links -->
+            <div class="lg:col-span-5 space-y-5 sm:space-y-6">
+              <div class="inline-block px-3.5 py-1 rounded-md bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow font-bold text-xs uppercase tracking-wider">
+                Direct Contact
+              </div>
+              <h2 class="text-2xl sm:text-4xl font-heading font-black text-white leading-tight">
+                Get in Touch with Us
+              </h2>
+              <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                Have a question, want to volunteer with us, or interested in joining Rotaract? We would love to hear from you. Send us a message or reach us directly below.
+              </p>
+
+              <div class="space-y-3.5 pt-1 sm:pt-2">
+                <div class="flex items-start gap-3 text-xs sm:text-sm text-gray-300">
+                  <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-brand-black border border-brand-border flex items-center justify-center text-brand-yellow flex-shrink-0 mt-0.5">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                  </div>
+                  <span class="leading-snug">SIES College Campus, Sion East, Mumbai - 400022</span>
+                </div>
+                <div class="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
+                  <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-brand-black border border-brand-border flex items-center justify-center text-brand-yellow flex-shrink-0">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                  </div>
+                  <!-- Clickable Gmail tab trigger -->
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Hello%20Rotaract%20SIES%20Sion%20East" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-brand-yellow transition-colors underline-offset-2 hover:underline inline-flex items-center gap-1.5 truncate" title="Click to open email tab in Gmail">
+                    <span class="truncate">rotaract.siessioneast@gmail.com</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5 text-gray-400 flex-shrink-0"></i>
+                  </a>
+                </div>
+                <div class="flex items-center gap-3 text-xs sm:text-sm text-gray-300">
+                  <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-brand-black border border-brand-border flex items-center justify-center text-brand-yellow flex-shrink-0">
+                    <i data-lucide="shield" class="w-4 h-4"></i>
+                  </div>
+                  <span>Rotaract District 3141, Mumbai</span>
+                </div>
+              </div>
+
+              <!-- Quick Communication Action Buttons (Gmail tab & Safe Instagram) -->
+              <div class="pt-3 sm:pt-4 space-y-3">
+                <!-- Working Gmail tab link -->
+                <a 
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Inquiry%20to%20Secretary%20-%20Rotaract%20SIES%20Sion%20East" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="w-full py-3.5 px-4 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-bold text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer min-h-[48px]"
+                  title="Opens an email compose tab directly in Gmail"
+                >
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                  <span>Email Our Secretary</span>
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                  <!-- Official Verified Instagram link -->
+                  <a 
+                    href="https://www.instagram.com/rcsiesse?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="py-3 px-3 rounded-xl bg-brand-black border border-brand-border hover:border-brand-yellow text-white font-medium text-xs transition-all flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                    title="Connect with us on Instagram @rcsiesse (opens in a new tab)"
+                  >
+                    <i data-lucide="instagram" class="w-4 h-4 text-brand-yellow"></i>
+                    <span>Connect on Instagram</span>
+                  </a>
+
+                  <button 
+                    id="copyEmailBtn" 
+                    type="button" 
+                    class="py-3 px-3 rounded-xl bg-brand-black border border-brand-border/60 hover:border-brand-yellow text-gray-300 hover:text-white text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
+                    title="Copy email to clipboard"
+                  >
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    <span>Copy Email Address</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Clean & Friendly Connect Form -->
+            <div class="lg:col-span-7 bg-brand-black/95 p-4 sm:p-7 md:p-8 rounded-2xl border border-brand-border relative">
+              <div class="mb-4 sm:mb-5">
+                <h3 class="font-heading font-bold text-lg sm:text-xl text-white">Send Us a Message</h3>
+                <p class="text-xs text-gray-400 mt-1">Fill in your details below and our team will get back to you soon.</p>
+              </div>
+
+              <!-- Form Alert Banner -->
+              <div id="connectFormAlert" class="hidden mb-4 p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300"></div>
+
+              <!-- Connect Form -->
+              <form id="connectForm" class="space-y-3.5 sm:space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                  <!-- Full Name -->
+                  <div>
+                    <label for="connectName" class="block text-xs font-semibold text-gray-300 mb-1">
+                      Your Name <span class="text-brand-yellow">*</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      id="connectName" 
+                      name="name" 
+                      required 
+                      minlength="2"
+                      maxlength="100"
+                      placeholder="e.g. Rahul Sharma" 
+                      class="w-full px-3.5 py-3 rounded-xl bg-brand-charcoal border border-brand-border text-white text-base sm:text-sm focus:outline-none focus:border-brand-yellow transition-all placeholder:text-gray-500"
+                    >
+                  </div>
+
+                  <!-- Email Address -->
+                  <div>
+                    <label for="connectEmail" class="block text-xs font-semibold text-gray-300 mb-1">
+                      Email Address <span class="text-brand-yellow">*</span>
+                    </label>
+                    <input 
+                      type="email" 
+                      id="connectEmail" 
+                      name="email" 
+                      required 
+                      placeholder="e.g. rahul@example.com" 
+                      class="w-full px-3.5 py-3 rounded-xl bg-brand-charcoal border border-brand-border text-white text-base sm:text-sm focus:outline-none focus:border-brand-yellow transition-all placeholder:text-gray-500"
+                    >
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                  <!-- Phone / WhatsApp (Optional) -->
+                  <div>
+                    <label for="connectPhone" class="block text-xs font-semibold text-gray-300 mb-1">
+                      Phone Number (Optional)
+                    </label>
+                    <input 
+                      type="tel" 
+                      id="connectPhone" 
+                      name="phone" 
+                      placeholder="+91 98765 43210" 
+                      class="w-full px-3.5 py-3 rounded-xl bg-brand-charcoal border border-brand-border text-white text-base sm:text-sm focus:outline-none focus:border-brand-yellow transition-all placeholder:text-gray-500"
+                    >
+                  </div>
+
+                  <!-- Selection for Event / Topic -->
+                  <div>
+                    <label for="connectInterest" class="block text-xs font-semibold text-gray-300 mb-1">
+                      What would you like to connect about?
+                    </label>
+                    <select 
+                      id="connectInterest" 
+                      name="interest" 
+                      class="w-full px-3.5 py-3 rounded-xl bg-brand-charcoal border border-brand-border text-white text-base sm:text-sm focus:outline-none focus:border-brand-yellow transition-all cursor-pointer"
+                    >
+                      <option value="General Club Inquiry">General Club Inquiry</option>
+                      <option value="Youth Leadership Conclave 2026">Join: Youth Leadership Conclave 2026</option>
+                      <option value="Community Blood Donation & Health Camp">Join: Blood Donation & Health Camp</option>
+                      <option value="Dronacharya Box Cricket & Sports Meet">Join: Box Cricket & Sports Meet</option>
+                      <option value="Club Membership">Join as a Club Member</option>
+                      <option value="Sponsorship & Partnership">Partner or Sponsor</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div>
+                  <label for="connectMessage" class="block text-xs font-semibold text-gray-300 mb-1">
+                    Your Message <span class="text-brand-yellow">*</span>
+                  </label>
+                  <textarea 
+                    id="connectMessage" 
+                    name="message" 
+                    rows="3" 
+                    required 
+                    minlength="3"
+                    maxlength="2000"
+                    placeholder="Write a short message, question, or how you'd like to participate..." 
+                    class="w-full px-3.5 py-3 rounded-xl bg-brand-charcoal border border-brand-border text-white text-base sm:text-sm focus:outline-none focus:border-brand-yellow transition-all placeholder:text-gray-500 resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                  type="submit" 
+                  id="connectSubmitBtn" 
+                  class="w-full py-3.5 sm:py-4 px-6 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-extrabold text-sm sm:text-base tracking-wide transition-all shadow-lg shadow-brand-yellow/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
+                >
+                  <i data-lucide="send" id="connectSubmitIcon" class="w-4 h-4"></i>
+                  <span id="connectSubmitText">Send Message</span>
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Receive updates from Rotaract (Newsletter Section) -->
+    <section class="py-12 sm:py-16 bg-brand-charcoal/50 border-t border-brand-border">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-block px-3 py-1 rounded-md bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow font-bold text-xs uppercase tracking-wider mb-2.5">
+          Stay in the Loop
+        </div>
+        <h3 class="text-xl sm:text-3xl font-heading font-bold text-white">Receive updates from Rotaract</h3>
+        <p class="text-gray-400 text-xs sm:text-sm mt-1.5 sm:mt-2 max-w-xl mx-auto px-2">
+          Get our latest event news, project stories, and volunteer opportunities delivered directly to your inbox.
+        </p>
+
+        <!-- Newsletter Form -->
+        <form id="newsletterForm" class="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3 max-w-md mx-auto">
+          <input 
+            type="email" 
+            id="newsletterEmail" 
+            required 
+            placeholder="Enter your email address" 
+            class="w-full px-4 py-3.5 rounded-xl bg-brand-black border border-brand-border text-white text-base sm:text-sm focus:outline-none focus:border-brand-yellow transition-colors placeholder:text-gray-500 min-h-[48px]"
+          >
+          <button 
+            type="submit" 
+            id="newsletterSubmitBtn" 
+            class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-brand-yellow hover:bg-brand-yellow-hover text-brand-black font-heading font-bold text-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer disabled:opacity-50 min-h-[48px]"
+          >
+            <i data-lucide="send" id="newsletterIcon" class="w-4 h-4"></i>
+            <span id="newsletterBtnText">Subscribe for Updates</span>
+          </button>
+        </form>
+        <div id="newsletterAlert" class="mt-3 text-xs hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-black border-t border-brand-border/80 pt-12 sm:pt-16 pb-10 sm:pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 mb-10 sm:mb-12">
+        
+        <div class="space-y-3.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-brand-yellow flex items-center justify-center font-bold text-brand-black font-heading">
+              RC
+            </div>
+            <span class="font-heading font-black text-lg sm:text-xl text-white tracking-wide">
+              SIES Sion East
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+            Rotaract Club of SIES Sion East (District 3141). 35 student members working together to build skills, serve our community, and grow as young leaders.
+          </p>
+          <div class="pt-1">
+            <a 
+              href="https://www.instagram.com/rcsiesse?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 text-xs font-semibold text-brand-yellow hover:text-white transition-colors"
+              title="Follow @rcsiesse on Instagram"
+            >
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+              <span>Connect with us on Instagram (@rcsiesse)</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider text-white mb-3 sm:mb-4">Official Theme</h4>
+          <p class="font-devanagari text-2xl sm:text-3xl text-brand-yellow tracking-wider">द्रोणाचार्य</p>
+          <p class="text-xs text-gray-400 mt-1.5 font-devSans">मार्गदर्शन, निपुणता आणि समाजसेवा</p>
+        </div>
+
+        <div>
+          <h4 class="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider text-white mb-3 sm:mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-gray-400">
+            <li><a href="#upcoming-events" class="hover:text-brand-yellow transition-colors">Upcoming Events</a></li>
+            <li><a href="#projects" class="hover:text-brand-yellow transition-colors">Past Projects</a></li>
+            <li><a href="#leadership" class="hover:text-brand-yellow transition-colors">Our Team</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=rotaract.siessioneast@gmail.com&su=Message%20for%20Secretary" target="_blank" rel="noopener noreferrer" class="hover:text-brand-yellow transition-colors flex items-center gap-1.5"><span>Email Our Secretary</span><i data-lucide="external-link" class="w-3 h-3 text-gray-500"></i></a></li>
+            <li><a href="#contact" class="hover:text-brand-yellow transition-colors">Send a Message</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-6 sm:pt-8 border-t border-brand-border/60 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-3 text-center sm:text-left">
+        <p>© 2026 Rotaract Club of SIES Sion East. District 3141.</p>
+        <div class="flex items-center gap-4 flex-wrap justify-center sm:justify-end">
+          <a href="/admin" class="hover:text-brand-yellow transition-colors inline-flex items-center gap-1.5 text-gray-400 hover:text-white py-1" title="Club Admin Portal (Restricted)">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-brand-yellow"></i>
+            <span class="font-semibold text-gray-300 hover:text-brand-yellow">Admin Portal</span>
+          </a>
+          <span class="inline-flex items-center gap-1.5 text-gray-400">
+            <span id="footerStatusDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="footerStatusText">API Server Active</span>
+          </span>
+          <p>Theme: <span class="font-devanagari text-brand-yellow text-sm">द्रोणाचार्य</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Floating Quick Access Bar (sm:hidden) -->
+  <aside id="mobileQuickBar" class="sm:hidden fixed bottom-4 right-4 z-40 flex items-center gap-2 pointer-events-auto">
+    <!-- Back to Top Button -->
+    <button 
+      id="backToTopBtn" 
+      type="button" 
+      aria-label="Back to top" 
+      class="opacity-0 pointer-events-none translate-y-3 transition-all duration-300 w-11 h-11 rounded-full bg-brand-charcoal/90 backdrop-blur-md border border-brand-border text-gray-300 hover:text-brand-yellow active:text-brand-yellow flex items-center justify-center shadow-xl active:scale-95 cursor-pointer"
+    >
+      <i data-lucide="chevron-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Quick Connect Floating Pill Button -->
+    <button 
+      id="floatingConnectBtn" 
+      type="button" 
+      aria-label="Quick Connect Form" 
+      class="h-11 px-4 rounded-full bg-brand-yellow text-brand-black font-heading font-extrabold text-xs flex items-center gap-2 shadow-xl shadow-brand-yellow/30 border border-yellow-400 active:scale-95 transition-all cursor-pointer"
+    >
+      <i data-lucide="message-square" class="w-4 h-4"></i>
+      <span>Connect</span>
+    </button>
+  </aside>
+
+  <!-- Asynchronous JavaScript Client Script -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // --------------------------------------------------------------------------
+    // API Configuration
+    // --------------------------------------------------------------------------
+    const API_BASE_URL = (window.location.protocol === 'http:' || window.location.protocol === 'https:') && window.location.port === '5000'
+      ? '' 
+      : 'http://localhost:5000';
+
+    // --------------------------------------------------------------------------
+    // UI Helpers: Toast & Notifications
+    // --------------------------------------------------------------------------
+    const actionToast = document.getElementById('actionToast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+    let toastTimeout = null;
+
+    function showToast(message, isError = false) {
+      if (!actionToast || !toastMessage) return;
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+
+      toastMessage.textContent = message;
+      if (isError) {
+        actionToast.classList.remove('border-brand-yellow/60');
+        actionToast.classList.add('border-red-500/80');
+        if (toastIcon) toastIcon.setAttribute('data-lucide', 'alert-circle');
+      } else {
+        actionToast.classList.remove('border-red-500/80');
+        actionToast.classList.add('border-brand-yellow/60');
+        if (toastIcon) toastIcon.setAttribute('data-lucide', 'check-circle');
+      }
+      lucide.createIcons();
+
+      actionToast.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+      actionToast.classList.add('translate-y-0', 'opacity-100');
+
+      toastTimeout = setTimeout(() => {
+        actionToast.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+        actionToast.classList.remove('translate-y-0', 'opacity-100');
+      }, 4000);
+    }
+
+    // --------------------------------------------------------------------------
+    // Backend Health Ping & Live Status
+    // --------------------------------------------------------------------------
+    async function checkServerHealth() {
+      const serverStatusBadge = document.getElementById('serverStatusBadge');
+      const serverStatusDot = document.getElementById('serverStatusDot');
+      const serverStatusText = document.getElementById('serverStatusText');
+      const footerStatusDot = document.getElementById('footerStatusDot');
+      const footerStatusText = document.getElementById('footerStatusText');
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/health`, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (serverStatusBadge) {
+            serverStatusBadge.classList.remove('border-red-500/30', 'text-red-400');
+            serverStatusBadge.classList.add('border-emerald-500/30', 'text-emerald-400');
+          }
+          if (serverStatusDot) {
+            serverStatusDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+          }
+          if (serverStatusText) {
+            serverStatusText.textContent = `Server: UP (${data.uptime})`;
+          }
+          if (footerStatusDot) footerStatusDot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+          if (footerStatusText) footerStatusText.textContent = 'API Server Online';
+        } else {
+          throw new Error('Server returned non-200');
+        }
+      } catch (err) {
+        if (serverStatusBadge) {
+          serverStatusBadge.classList.remove('border-emerald-500/30', 'text-emerald-400');
+          serverStatusBadge.classList.add('border-amber-500/30', 'text-amber-400');
+        }
+        if (serverStatusDot) {
+          serverStatusDot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        }
+        if (serverStatusText) {
+          serverStatusText.textContent = 'Offline (Start server.js)';
+        }
+        if (footerStatusDot) footerStatusDot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        if (footerStatusText) footerStatusText.textContent = 'Backend Offline';
+      }
+    }
+
+    checkServerHealth();
+    setInterval(checkServerHealth, 30000);
+
+    // --------------------------------------------------------------------------
+    // Mobile Navbar & Drawer Logic with Backdrop & Scroll Lock
+    // --------------------------------------------------------------------------
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function openMobileMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.remove('hidden');
+      if (mobileMenuBackdrop) mobileMenuBackdrop.classList.remove('hidden');
+      if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('overflow-hidden');
+      if (menuIcon) {
+        menuIcon.setAttribute('data-lucide', 'x');
+        lucide.createIcons();
+      }
+    }
+
+    function closeMobileMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.add('hidden');
+      if (mobileMenuBackdrop) mobileMenuBackdrop.classList.add('hidden');
+      if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('overflow-hidden');
+      if (menuIcon) {
+        menuIcon.setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+      }
+    }
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          openMobileMenu();
+        } else {
+          closeMobileMenu();
+        }
+      });
+
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          closeMobileMenu();
+        });
+      });
+
+      if (mobileMenuBackdrop) {
+        mobileMenuBackdrop.addEventListener('click', () => {
+          closeMobileMenu();
+        });
+      }
+
+      // Close menu on Escape key press
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+          closeMobileMenu();
+        }
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Smooth Header & Back-to-Top Behavior on Scroll (Passive for 60fps)
+    // --------------------------------------------------------------------------
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    const floatingConnectBtn = document.getElementById('floatingConnectBtn');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const header = document.getElementById('mainHeader');
+
+      if (header) {
+        if (scrollY > 30) {
+          header.classList.add('shadow-xl', 'bg-brand-black');
+          header.classList.remove('bg-brand-black/95');
+        } else {
+          header.classList.remove('shadow-xl', 'bg-brand-black');
+          header.classList.add('bg-brand-black/95');
+        }
+      }
+
+      // Back-to-top floating button toggle
+      if (backToTopBtn) {
+        if (scrollY > 350) {
+          backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+          backToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+          backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        }
+      }
+    }, { passive: true });
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    if (floatingConnectBtn) {
+      floatingConnectBtn.addEventListener('click', () => {
+        scrollToConnectForm();
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Copy Email to Clipboard
+    // --------------------------------------------------------------------------
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    if (copyEmailBtn) {
+      copyEmailBtn.addEventListener('click', async () => {
+        const email = 'rotaract.siessioneast@gmail.com';
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(email);
+          } else {
+            const temp = document.createElement('input');
+            temp.value = email;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+          }
+          showToast(`Copied ${email} to clipboard!`);
+        } catch (err) {
+          showToast('Failed to copy to clipboard', true);
+        }
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Connect Button Routing & Smooth Scrolling
+    // --------------------------------------------------------------------------
+    function scrollToConnectForm(selectedInterest = null) {
+      const contactSection = document.getElementById('contact');
+      const contactContainer = document.getElementById('contactContainer');
+      const connectInterest = document.getElementById('connectInterest');
+      const connectName = document.getElementById('connectName');
+
+      if (contactSection) {
+        // Offset scroll slightly so sticky mobile header does not cover the top
+        const headerOffset = 70;
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+
+      if (selectedInterest && connectInterest) {
+        for (let i = 0; i < connectInterest.options.length; i++) {
+          if (connectInterest.options[i].value.includes(selectedInterest) || 
+              connectInterest.options[i].text.includes(selectedInterest)) {
+            connectInterest.selectedIndex = i;
+            break;
+          }
+        }
+      }
+
+      // Add visual pulse effect to form container
+      if (contactContainer) {
+        contactContainer.classList.remove('highlight-form');
+        void contactContainer.offsetWidth; // Trigger reflow
+        contactContainer.classList.add('highlight-form');
+      }
+
+      if (connectName) {
+        setTimeout(() => connectName.focus(), 650);
+      }
+    }
+
+    // Wire Desktop & Mobile Connect buttons
+    const navConnectBtn = document.getElementById('navConnectBtn');
+    if (navConnectBtn) {
+      navConnectBtn.addEventListener('click', () => scrollToConnectForm());
+    }
+
+    const mobileConnectBtn = document.getElementById('mobileConnectBtn');
+    if (mobileConnectBtn) {
+      mobileConnectBtn.addEventListener('click', () => scrollToConnectForm());
+    }
+
+    // Wire UPCOMING EVENT "Join Event" buttons
+    document.querySelectorAll('.upcoming-event-btn').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const eventTitle = e.currentTarget.getAttribute('data-event');
+        scrollToConnectForm(eventTitle);
+      });
+    });
+
+    // --------------------------------------------------------------------------
+    // Asynchronous Fetch: Connect Form Handler
+    // --------------------------------------------------------------------------
+    const connectForm = document.getElementById('connectForm');
+    const connectSubmitBtn = document.getElementById('connectSubmitBtn');
+    const connectSubmitText = document.getElementById('connectSubmitText');
+    const connectSubmitIcon = document.getElementById('connectSubmitIcon');
+    const connectFormAlert = document.getElementById('connectFormAlert');
+
+    if (connectForm) {
+      connectForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('connectName').value.trim();
+        const email = document.getElementById('connectEmail').value.trim();
+        const phone = document.getElementById('connectPhone').value.trim();
+        const interest = document.getElementById('connectInterest').value;
+        const message = document.getElementById('connectMessage').value.trim();
+
+        // UI Loading State
+        connectSubmitBtn.disabled = true;
+        connectSubmitText.textContent = 'Sending...';
+        if (connectSubmitIcon) {
+          connectSubmitIcon.setAttribute('data-lucide', 'loader-2');
+          connectSubmitIcon.classList.add('animate-spin');
+        }
+        lucide.createIcons();
+
+        connectFormAlert.classList.add('hidden');
+        connectFormAlert.className = 'hidden mb-4 p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300';
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/connect`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              phone: phone || null,
+              category: interest.includes('Join:') ? 'Event Registration' : 'General Inquiry',
+              interest,
+              message
+            })
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            connectFormAlert.classList.remove('hidden');
+            connectFormAlert.classList.add('bg-emerald-500/10', 'border', 'border-emerald-500/40', 'text-emerald-300');
+            connectFormAlert.innerHTML = `
+              <div class="flex items-start gap-2.5">
+                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5"></i>
+                <div>
+                  <strong class="font-bold">Message Sent!</strong>
+                  <p class="mt-0.5">${result.message}</p>
+                </div>
+              </div>
+            `;
+            lucide.createIcons();
+            showToast('Your message has been sent to our Secretary!');
+            connectForm.reset();
+            checkServerHealth();
+          } else {
+            const errorMsg = result.details ? result.details.join(' ') : (result.error || 'Please check the form and try again.');
+            connectFormAlert.classList.remove('hidden');
+            connectFormAlert.classList.add('bg-red-500/10', 'border', 'border-red-500/40', 'text-red-300');
+            connectFormAlert.innerHTML = `
+              <div class="flex items-start gap-2.5">
+                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"></i>
+                <div>
+                  <strong class="font-bold">Notice</strong>
+                  <p class="mt-0.5">${errorMsg}</p>
+                </div>
+              </div>
+            `;
+            lucide.createIcons();
+            showToast('Please fix the errors in the form.', true);
+          }
+        } catch (networkError) {
+          console.error('[Connection Error]:', networkError);
+          connectFormAlert.classList.remove('hidden');
+          connectFormAlert.classList.add('bg-amber-500/10', 'border', 'border-amber-500/40', 'text-amber-300');
+          connectFormAlert.innerHTML = `
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="wifi-off" class="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="font-bold">Server Offline</strong>
+                <p class="mt-0.5">Cannot reach the backend server at <code>http://localhost:5000</code>. Please ensure the server is running.</p>
+              </div>
+            </div>
+          `;
+          lucide.createIcons();
+          showToast('Server is currently offline', true);
+        } finally {
+          connectSubmitBtn.disabled = false;
+          connectSubmitText.textContent = 'Send Message';
+          if (connectSubmitIcon) {
+            connectSubmitIcon.setAttribute('data-lucide', 'send');
+            connectSubmitIcon.classList.remove('animate-spin');
+          }
+          lucide.createIcons();
+        }
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Asynchronous Fetch: Newsletter Form Handler
+    // --------------------------------------------------------------------------
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+    const newsletterSubmitBtn = document.getElementById('newsletterSubmitBtn');
+    const newsletterBtnText = document.getElementById('newsletterBtnText');
+    const newsletterAlert = document.getElementById('newsletterAlert');
+
+    if (newsletterForm && newsletterEmail) {
+      newsletterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = newsletterEmail.value.trim();
+        if (!email) return;
+
+        newsletterSubmitBtn.disabled = true;
+        newsletterBtnText.textContent = 'Subscribing...';
+        newsletterAlert.classList.add('hidden');
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/newsletter`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ email })
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            newsletterAlert.className = 'mt-3 text-xs text-emerald-400 font-medium block';
+            newsletterAlert.textContent = result.message;
+            showToast('Subscribed for updates!');
+            newsletterForm.reset();
+            checkServerHealth();
+          } else {
+            newsletterAlert.className = 'mt-3 text-xs text-red-400 font-medium block';
+            newsletterAlert.textContent = result.error || 'Subscription failed. Please check your email.';
+          }
+        } catch (err) {
+          newsletterAlert.className = 'mt-3 text-xs text-amber-400 font-medium block';
+          newsletterAlert.textContent = 'Server offline: Please ensure backend is running.';
+          showToast('Server offline', true);
+        } finally {
+          newsletterSubmitBtn.disabled = false;
+          newsletterBtnText.textContent = 'Subscribe for Updates';
+          lucide.createIcons();
+        }
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // Quick Keyboard Shortcut for Club Admins: Alt+A or Ctrl+Shift+A
+    // --------------------------------------------------------------------------
+    document.addEventListener('keydown', (e) => {
+      if ((e.altKey && (e.key === 'a' || e.key === 'A')) || 
+          (e.ctrlKey && e.shiftKey && (e.key === 'a' || e.key === 'A'))) {
+        window.location.href = '/admin';
+      }
+    });
+  </script>
+</body>
+</html>
